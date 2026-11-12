@@ -1,55 +1,62 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#10131c">
-  <title>Craft Coins — Tap</title>
+  <title>CraftCoins Tap V1.2</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <main class="app">
-    <header class="topbar">
-      <div class="brand-mark">C</div>
-      <div>
-        <div class="brand">CRAFT COINS</div>
-        <div class="subtitle">InherentCraft • Tap to earn</div>
-      </div>
-      <span class="demo">LOCAL DEMO</span>
+    <header>
+      <h1>CRAFT COINS</h1>
+      <p>InherentCraft • V1.2</p>
     </header>
 
-    <section class="wallet panel">
-      <div class="eyebrow">ВАШ БАЛАНС</div>
-      <div class="balance"><span id="coins">0</span><small>CFC</small></div>
-      <div class="wallet-note">Craft Coins</div>
+    <section class="wallets">
+      <div class="wallet">
+        <span>CRAFT</span>
+        <strong id="craft">0</strong>
+      </div>
+      <div class="wallet">
+        <span>CRAFT COINS</span>
+        <strong id="coins">0</strong>
+      </div>
     </section>
 
-    <section class="tap-section">
-      <div class="tap-hint">НАЖИМАЙ НА МОНЕТУ</div>
-      <button class="coin-button" id="tapButton" aria-label="Нажать для получения прогресса">
-        <span class="coin-ring">
-          <span class="coin-symbol">C</span>
-          <span class="coin-label">CRAFT</span>
-        </span>
+    <section class="panel tap-section">
+      <h3>НАЖИМАЙ НА МОНЕТУ</h3>
+      <button id="tapButton" class="coin">
+        <span>C</span>
+        <small>CRAFT</small>
       </button>
-      <div class="tap-count"><strong id="taps">0</strong> / 500 нажатий</div>
-      <div class="progress-track"><div class="progress-fill" id="progress"></div></div>
-      <p class="conversion">500 нажатий = <b>1 CFC</b></p>
+      <p><b id="taps">0</b> / 250 нажатий</p>
+      <div class="progress">
+        <div id="progress"></div>
+      </div>
+      <p>250 нажатий = <b>1 Craft</b></p>
+    </section>
+
+    <section class="panel shop">
+      <h2>Магазин</h2>
+      <div class="product">
+        <div>
+          <b>1 Craft Coin</b>
+          <p>Стоимость: 150 Craft</p>
+        </div>
+        <button id="buyButton">Купить</button>
+      </div>
+      <p id="shopMessage">Добро пожаловать в магазин!</p>
     </section>
 
     <section class="panel stats">
-      <div class="stat">
-        <span class="stat-label">Всего нажатий</span>
-        <strong id="totalTaps">0</strong>
-      </div>
-      <div class="stat">
-        <span class="stat-label">Получено CFC</span>
-        <strong id="earned">0</strong>
-      </div>
+      <p>Всего нажатий: <b id="totalTaps">0</b></p>
+      <p>Куплено Craft Coins: <b id="purchased">0</b></p>
     </section>
 
     <footer>
-      <p>Демо-версия без сервера. Баланс хранится только в этом браузере.</p>
+      Локальная версия без сервера.
     </footer>
   </main>
   <script src="script.js"></script>
