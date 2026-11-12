@@ -4,61 +4,46 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CraftCoins Tap V1.2</title>
+  <title>CraftCoins Tap</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main class="app">
-    <header>
-      <h1>CRAFT COINS</h1>
-      <p>InherentCraft • V1.2</p>
-    </header>
 
-    <section class="wallets">
-      <div class="wallet">
-        <span>CRAFT</span>
-        <strong id="craft">0</strong>
-      </div>
-      <div class="wallet">
-        <span>CRAFT COINS</span>
-        <strong id="coins">0</strong>
-      </div>
-    </section>
+  <div class="container">
+    <h1>CraftCoins Tap</h1>
 
-    <section class="panel tap-section">
-      <h3>НАЖИМАЙ НА МОНЕТУ</h3>
-      <button id="tapButton" class="coin">
-        <span>C</span>
-        <small>CRAFT</small>
-      </button>
-      <p><b id="taps">0</b> / 250 нажатий</p>
-      <div class="progress">
-        <div id="progress"></div>
+    <div class="balance">
+      <div class="coin-box">
+        <h2>Craft</h2>
+        <p id="craft">0</p>
       </div>
-      <p>250 нажатий = <b>1 Craft</b></p>
-    </section>
 
-    <section class="panel shop">
+      <div class="coin-box">
+        <h2>CraftCoins</h2>
+        <p id="coins">0</p>
+      </div>
+    </div>
+
+    <div class="tap-section">
+      <button id="tapButton">TAP</button>
+      <p>Тапов: <span id="totalTaps">0</span></p>
+      <p>До следующего Craft: <span id="progress">250</span></p>
+    </div>
+
+    <section class="shop">
       <h2>Магазин</h2>
-      <div class="product">
-        <div>
-          <b>1 Craft Coin</b>
-          <p>Стоимость: 150 Craft</p>
-        </div>
+
+      <div class="shop-item">
+        <h3>1 CraftCoins</h3>
+        <p>Цена: 150 Craft</p>
         <button id="buyButton">Купить</button>
       </div>
-      <p id="shopMessage">Добро пожаловать в магазин!</p>
-    </section>
 
-    <section class="panel stats">
-      <p>Всего нажатий: <b id="totalTaps">0</b></p>
-      <p>Куплено Craft Coins: <b id="purchased">0</b></p>
+      <p>Куплено: <span id="purchased">0</span></p>
+      <p id="shopMessage"></p>
     </section>
+  </div>
 
-    <footer>
-      Локальная версия без сервера.
-    </footer>
-  </main>
   <script src="script.js"></script>
 </body>
 </html>

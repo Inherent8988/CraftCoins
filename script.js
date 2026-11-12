@@ -3,99 +3,61 @@ const TAPS_PER_CRAFT = 250;
 const CRAFT_PRICE = 150;
 const STORAGE_KEY = "craftCoinsTapDemo_v1";
 
-const el = {
-  craft: document.getElementById("craft"),
-  coins: document.getElementById("coins"),
-  taps: document.getElementById("taps"),
-  totalTaps: document.getElementById("totalTaps"),
-  purchased: document.getElementById("purchased"),
-  progress: document.getElementById("progress"),
-  tapButton: document.getElementById("tapButton"),
-  buyButton: document.getElementById("buyButton"),
-  shopMessage: document.getElementById("shopMessage")
+let state = {
+  totalTaps: 0,
+  craft: 0,
+  coins: 0,
+  purchased: 0
 };
 
-function loadState() {
-  try {
-    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+// Загружаем сохранение
+try {
+  const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
 
-    if (saved && Number.isInteger(saved.totalTaps) &&
-        saved.totalTaps >= 0) {
-      return {
-        totalTaps: saved.totalTaps,
-        craft: Number.isInteger(saved.craft) &&
-          saved.craft >= 0
-          ? saved.craft
-          : Math.floor(saved.totalTaps / 250),
-        coins: Number.isInteger(saved.coins) &&
-          saved.coins >= 0 ? saved.coins : 0,
-        purchased: Number.isInteger(saved.purchased) &&
-          saved.purchased >= 0 ? saved.purchased : 0
-      };
-    }
-  } catch (error) {}
-
-  return {
-    totalTaps: 0,
-    craft: 0,
-    coins: 0,
-    purchased: 0
-  };
+  if (saved && typeof saved === "object") {
+    state.totalTaps = Number(saved.totalTaps) || 0;
+    state.craft = Number(saved.craft) || 0;
+    state.coins = Number(saved.coins) || 0;
+    state.purchased = Number(saved.purchased) || 0;
+  }
+} catch (error) {
+  console.log("Не удалось загрузить сохранение");
 }
 
-let state = loadState();
-
-function saveState() {
-  localStorage.setItem(
-    STORAGE_KEY,
-    JSON.stringify(state)
-  );
+function save() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 }
 
 function render() {
-  const progressTaps =
-    state.totalTaps % TAPS_PER_CRAFT;
+  document.getElementById("craft").textContent = state.craft;
+  document.getElementById("coins").textContent = state.coins;
+  document.getElementById("totalTaps").textContent = state.totalTaps;
+  document.getElementById("purchased").textContent = state.purchased;
 
-  el.craft.textContent =
-    state.craft.toLocaleString("en-US");
+  const remaining = TAPS_PER_CRAFT -
+    (state.totalTaps % TAPS_PER_CRAFT);
 
-  el.coins.textContent =
-    state.coins.toLocaleString("en-US");
-
-  el.taps.textContent = progressTaps;
-
-  el.totalTaps.textContent =
-    state.totalTaps.toLocaleString("en-US");
-
-  el.purchased.textContent =
-    state.purchased.toLocaleString("en-US");
-
-  el.progress.style.width =
-    (progressTaps / TAPS_PER_CRAFT * 100) + "%";
-
-  el.buyButton.disabled =
-    state.craft < CRAFT_PRICE;
+  document.getElementById("progress").textContent = remaining;
 }
 
-// Получение Craft
-el.tapButton.addEventListener("click", () => {
+// Нажатие на кнопку
+document.getElementById("tapButton").addEventListener("click", () => {
   state.totalTaps++;
 
   if (state.totalTaps % TAPS_PER_CRAFT === 0) {
     state.craft++;
-    el.shopMessage.textContent =
-      "Получен 1 Craft!";
   }
 
-  saveState();
+  save();
   render();
 });
 
-// Покупка Craft Coins
-el.buyButton.addEventListener("click", () => {
+// Покупка CraftCoins
+document.getElementById("buyButton").addEventListener("click", () => {
+  const message = document.getElementById("shopMessage");
+
   if (state.craft < CRAFT_PRICE) {
-    el.shopMessage.textContent =
-      "Недостаточно Craft!";
+    message.textContent = "Недостаточно Craft!";
     return;
   }
 
@@ -103,11 +65,10 @@ el.buyButton.addEventListener("click", () => {
   state.coins++;
   state.purchased++;
 
-  saveState();
-  render();
+  message.textContent = "Покупка успешна! +1 CraftCoins";
 
-  el.shopMessage.textContent =
-    "Успешно! Получен 1 Craft Coin.";
+  save();
+  render();
 });
 
 render();
