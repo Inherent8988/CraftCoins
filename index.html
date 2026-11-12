@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#10131c">
+  <title>Craft Coins — Tap</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div class="brand-mark">C</div>
+      <div>
+        <div class="brand">CRAFT COINS</div>
+        <div class="subtitle">InherentCraft • Tap to earn</div>
+      </div>
+      <span class="demo">LOCAL DEMO</span>
+    </header>
+
+    <section class="wallet panel">
+      <div class="eyebrow">ВАШ БАЛАНС</div>
+      <div class="balance"><span id="coins">0</span><small>CFC</small></div>
+      <div class="wallet-note">Craft Coins</div>
+    </section>
+
+    <section class="tap-section">
+      <div class="tap-hint">НАЖИМАЙ НА МОНЕТУ</div>
+      <button class="coin-button" id="tapButton" aria-label="Нажать для получения прогресса">
+        <span class="coin-ring">
+          <span class="coin-symbol">C</span>
+          <span class="coin-label">CRAFT</span>
+        </span>
+      </button>
+      <div class="tap-count"><strong id="taps">0</strong> / 500 нажатий</div>
+      <div class="progress-track"><div class="progress-fill" id="progress"></div></div>
+      <p class="conversion">500 нажатий = <b>1 CFC</b></p>
+    </section>
+
+    <section class="panel stats">
+      <div class="stat">
+        <span class="stat-label">Всего нажатий</span>
+        <strong id="totalTaps">0</strong>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Получено CFC</span>
+        <strong id="earned">0</strong>
+      </div>
+    </section>
+
+    <footer>
+      <p>Демо-версия без сервера. Баланс хранится только в этом браузере.</p>
+      <button class="reset" id="resetButton">Сбросить прогресс</button>
+    </footer>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
