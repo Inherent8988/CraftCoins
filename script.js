@@ -8,7 +8,6 @@ const els = {
   earned: document.getElementById("earned"),
   progress: document.getElementById("progress"),
   tapButton: document.getElementById("tapButton"),
-  resetButton: document.getElementById("resetButton")
 };
 
 let state = loadState();
@@ -42,12 +41,4 @@ els.tapButton.addEventListener("click", () => {
   saveState();
   render();
 });
-
-els.resetButton.addEventListener("click", () => {
-  if (!confirm("Сбросить весь прогресс Craft Coins в этом браузере?")) return;
-  state = { totalTaps: 0 };
-  saveState();
-  render();
-});
-
 render();
