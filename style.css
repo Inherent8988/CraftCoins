@@ -1,32 +1,121 @@
+* { box-sizing: border-box; }
+:root {
+  color-scheme: dark;
+  --bg: #0d1018;
+  --panel: #171c29;
+  --line: #2b3448;
+  --gold: #f3bd4b;
+  --muted: #9aa6ba;
+}
+body {
+  margin: 0; min-height: 100vh; padding: 22px 14px;
+  background: radial-gradient(ellipse at 50% 0%, #202b43 0%, var(--bg) 58%);
+  color: #f4f6fb; font-family: Inter, system-ui, -apple-system, Segoe UI, sans-serif;
+}
+.app { width: min(100%, 480px); margin: 0 auto; }
+.topbar { display:flex; align-items:center; gap:12px; margin: 5px 2px 24px; }
+.brand-mark {
+  width:44px; height:44px; border-radius:14px; display:grid; place-items:center;
+  color:#17130a; font-size:25px; font-weight:950;
+  background:linear-gradient(145deg,#ffe29a,#d89120);
+  box-shadow:0 5px 22px #e4a52b33;
+}
+.brand { font-size:15px; font-weight:900; letter-spacing:1.5px; }
+.subtitle { color:var(--muted); font-size:11px; margin-top:3px; }
+.demo { margin-left:auto; font-size:9px; font-weight:800; letter-spacing:1px; color:#8de0b2; border:1px solid #316c50; padding:6px 8px; border-radius:20px; }
+.panel { background:linear-gradient(145deg,#1b2231,#141925); border:1px solid var(--line); border-radius:20px; box-shadow:0 12px 35px #0003; }
+.wallet { padding:21px 22px; }
+.eyebrow,.tap-hint { color:var(--muted); font-size:10px; font-weight:800; letter-spacing:1.8px; }
+.balance { display:flex; align-items:baseline; gap:9px; margin-top:7px; font-size:45px; font-weight:900; letter-spacing:-2px; }
+.balance small { color:var(--gold); font-size:15px; letter-spacing:1px; }
+.wallet-note { color:var(--muted); font-size:12px; }
+.tap-section { text-align:center; padding:29px 10px 25px; }
+.tap-hint { margin-bottom:20px; }
+.coin-button {
+  border:0; padding:0; background:none; border-radius:50%; cursor:pointer;
+  -webkit-tap-highlight-color:transparent; transition:transform .08s ease;
+  filter:drop-shadow(0 14px 18px #0008);
+}
+.coin-button:active { transform:scale(.94); }
+.coin-ring {
+  width:190px; height:190px; border-radius:50%; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; position:relative;
+  color:#6e430b; border:9px double #b8791d;
+  background:radial-gradient(circle at 35% 25%,#fff0ad 0%,#f5c85e 28%,#d9952b 68%,#a96212 100%);
+  box-shadow:inset 0 0 0 5px #ffe49a88,inset 0 -9px 15px #8a4d0b66,0 0 0 5px #f3bd4b22;
+}
+.coin-symbol { font-size:88px; line-height:.9; font-weight:1000; text-shadow:0 2px 0 #ffe7a4; }
+.coin-label { margin-top:7px; font-size:11px; font-weight:1000; letter-spacing:3px; }
+.tap-count { margin-top:22px; color:var(--muted); font-size:13px; }
+.tap-count strong { color:#fff; font-size:20px; }
+.progress-track { height:9px; max-width:310px; margin:12px auto 0; background:#293247; border-radius:20px; overflow:hidden; }
+.progress-fill { width:0%; height:100%; border-radius:20px; background:linear-gradient(90deg,#d88b20,#ffdc7a); transition:width .12s; }
+.conversion { color:var(--muted); font-size:12px; margin:12px 0 0; }
+.conversion b { color:var(--gold); }
+.stats { display:grid; grid-template-columns:1fr 1fr; padding:17px 18px; }
+.stat + .stat { border-left:1px solid var(--line); padding-left:20px; }
+.stat-label { display:block; color:var(--muted); font-size:11px; margin-bottom:7px; }
+.stat strong { font-size:21px; }
+footer { text-align:center; color:#8490a5; font-size:10px; line-height:1.5; padding:20px 10px; }
+.reset { margin-top:7px; border:1px solid #39445a; color:#b8c2d2; background:#171c29; border-radius:10px; padding:9px 14px; font-size:11px; cursor:pointer; }
+.reset:active { background:#242d40; }
+@media (max-height:700px) { .coin-ring { width:155px; height:155px; } .coin-symbol { font-size:70px; } .tap-section { padding:20px 10px; } }
 
-.balance {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
+
+/* V1.2: дополнительные элементы магазина и второго баланса */
+.wallet-balances {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.wallet-currency + .wallet-currency {
+  border-left: 1px solid var(--line);
+  padding-left: 14px;
+}
+.wallet-currency .balance {
   flex-wrap: wrap;
+  gap: 5px;
+  font-size: clamp(27px, 8vw, 40px);
 }
-
-.coin-box {
-  padding: 15px;
-  border-radius: 15px;
-  min-width: 120px;
+.wallet-currency .balance small {
+  font-size: 11px;
 }
-
 .shop {
-  margin-top: 30px;
-  padding: 20px;
-  border-radius: 15px;
+  margin-top: 16px;
+  padding: 18px 20px;
 }
-
-.shop-item {
-  padding: 15px;
-  border-radius: 12px;
+.shop-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 14px;
 }
-
-#buyButton {
+.shop-description {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.shop-description strong { font-size: 16px; }
+.shop-description span, .shop-message {
+  color: var(--muted);
+  font-size: 12px;
+}
+.buy-button {
+  border: 1px solid #b8791d;
+  color: #17130a;
+  background: linear-gradient(145deg,#ffe29a,#d89120);
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-size: 12px;
+  font-weight: 900;
   cursor: pointer;
+  white-space: nowrap;
 }
-
-#shopMessage {
-  margin-top: 10px;
+.buy-button:active { transform: scale(.97); }
+.shop-message { min-height: 15px; margin: 10px 0 0; }
+@media (max-width:360px) {
+  .wallet { padding: 18px 15px; }
+  .wallet-balances { gap: 8px; }
+  .wallet-currency + .wallet-currency { padding-left: 9px; }
 }
